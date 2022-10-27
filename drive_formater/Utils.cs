@@ -70,7 +70,101 @@ foreach ($disk in $disks2format) {
         long bytes = Math.Abs(byteCount);
         int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1000)));
         double num = Math.Round(bytes / Math.Pow(1000, place), 1);
-        return (Math.Sign(byteCount) * num).ToString() + suf[place];
+
+        double size = Math.Sign(byteCount) * num;
+
+        // Below codes are ridiclious
+        if (size > 490 && size < 560 && place == 3)
+        {
+            size = 500; 
+        }
+        if (size > 990 && size < 1000 && place == 3)
+        {
+            size = 1;
+            place++;
+        }
+        else if (size > 1 && size < 1.1 && place == 5)
+        {
+            size = 1;
+        }
+        else if (size > 1.9 && size < 2.1 && place == 5)
+        {
+            size = 2;
+        }
+        else if (size > 2.9 && size < 3.1 && place == 5)
+        {
+            size = 3;
+        }
+        else if (size > 3.9 && size < 4.1 && place == 5)
+        {
+            size = 4;
+        }
+        else if (size > 4.9 && size < 5.1 && place == 5)
+        {
+            size = 5;
+        }
+        else if (size > 5.9 && size < 6.1 && place == 5)
+        {
+            size = 6;
+        }
+        else if (size > 6.9 && size < 7.1 && place == 5)
+        {
+            size = 7;
+        }
+        else if (size > 7.9 && size < 8.1 && place == 5)
+        {
+            size = 8;
+        }
+        else if (size > 8.9 && size < 9.1 && place == 5)
+        {
+            size = 9;
+        }
+        else if (size > 9.9 && size < 10.1 && place == 5)
+        {
+            size = 10;
+        }
+        else if (size > 10.9 && size < 11.1 && place == 5)
+        {
+            size = 11;
+        }
+        else if (size > 11.9 && size < 12.1 && place == 5)
+        {
+            size = 12;
+        }
+        else if (size > 12.9 && size < 13.1 && place == 5)
+        {
+            size = 13;
+        }
+        else if (size > 13.9 && size < 14.1 && place == 5)
+        {
+            size = 14;
+        }
+        else if (size > 14.9 && size < 15.1 && place == 5)
+        {
+            size = 15;
+        }
+        else if (size > 15.9 && size < 16.1 && place == 5)
+        {
+            size = 16;
+        }
+        else if (size > 16.9 && size < 17.1 && place == 5)
+        {
+            size = 17;
+        }
+        else if (size > 17.9 && size < 18.1 && place == 5)
+        {
+            size = 18;
+        }
+        else if (size > 18.9 && size < 19.1 && place == 5)
+        {
+            size = 19;
+        }
+        else if (size > 19.9 && size < 20.1 && place == 5)
+        {
+            size = 20;
+        }
+
+        return (size.ToString() + suf[place]);
     }
 
 
@@ -84,10 +178,10 @@ foreach ($disk in $disks2format) {
 
         foreach (PSObject pSObject in psOutput)
         {
-            string manufacture = pSObject.Members["Manufacturer"].Value.ToString();
-            string model = pSObject.Members["Model"].Value.ToString();
+            string manufacture = pSObject.Members["Manufacturer"].Value.ToString().Trim();
+            string model = pSObject.Members["Model"].Value.ToString().Trim();
             string healthCode = pSObject.Members["HealthStatus"].Value.ToString();
-            string health = "unknown";
+            string health = "unknown";  
             if (healthCode == "0")
             {
                 health = "Good";
@@ -96,7 +190,7 @@ foreach ($disk in $disks2format) {
             {
                 health = "Bad";
             }
-            string serialNum = pSObject.Members["SerialNumber"].Value.ToString().Replace(" ", String.Empty);
+            string serialNum = pSObject.Members["SerialNumber"].Value.ToString().Trim().TrimStart('0').PadLeft(1, '0');
             long sizelong = long.Parse(pSObject.Members["Size"].Value.ToString());
             string size = BytesToString(sizelong);
             Drive drive = new Drive() { Manufacturer = manufacture, Model = model, HealthStatus = health, SerialNum = serialNum, Size = size };

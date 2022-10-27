@@ -227,7 +227,7 @@
             // 
             this.btnPrintAll.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrintAll.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnPrintAll.Location = new System.Drawing.Point(644, 121);
+            this.btnPrintAll.Location = new System.Drawing.Point(641, 121);
             this.btnPrintAll.Name = "btnPrintAll";
             this.btnPrintAll.Size = new System.Drawing.Size(123, 32);
             this.btnPrintAll.TabIndex = 10;
